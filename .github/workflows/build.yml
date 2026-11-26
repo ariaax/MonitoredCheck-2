@@ -32,6 +32,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Set up Gradle with caching
         uses: gradle/actions/setup-gradle@v4
@@ -82,7 +84,7 @@ jobs:
           echo "|-----|------|" >> "$GITHUB_STEP_SUMMARY"
           for apk in $(find app/build/outputs/apk -name '*.apk' 2>/dev/null); do
             size=$(du -h "$apk" | cut -f1)
-            echo "| \`$(basename "$apk")\` | $size |" >> "$GITHUB_STEP_SUMMARY"
+            echo "| `$(basename "$apk")` | $size |" >> "$GITHUB_STEP_SUMMARY"
           done
 
       - name: Upload debug APK
